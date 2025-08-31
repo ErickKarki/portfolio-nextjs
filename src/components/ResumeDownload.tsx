@@ -26,7 +26,7 @@ const ResumeDownload = () => {
           // Create and trigger download
           const link = document.createElement('a');
           link.href = '/resume.pdf';
-          link.download = 'Erick_Karki_Resume.pdf';
+          link.download = 'Resume.pdf';
           link.target = '_blank';
           link.rel = 'noopener noreferrer';
           document.body.appendChild(link);
@@ -75,7 +75,7 @@ const ResumeDownload = () => {
                 Resume Download
               </h4>
               <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                Erick_Karki_Resume.pdf (245 KB)
+                Resume.pdf (245 KB)
               </p>
             </div>
           </div>
