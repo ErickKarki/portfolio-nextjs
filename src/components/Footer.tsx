@@ -188,7 +188,7 @@ const Footer = () => {
             <div className="flex items-center space-x-6 text-sm text-gray-400">
               <span>Built with Next.js, TypeScript & Tailwind CSS</span>
               <span className="hidden sm:block">•</span>
-              <span className="hidden sm:block">Made with ❤️ in Nepal</span>
+              <span className="hidden sm:block">Developed in Nepal</span>
             </div>
           </div>
         </motion.div>
