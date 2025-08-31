@@ -1,8 +1,14 @@
 'use client';
 
 import { FileCode, Database, Cloud, Code, User, Briefcase } from 'lucide-react';
+import InteractiveTerminal from '../InteractiveTerminal';
+import GitStatus from '../GitStatus';
+import MatrixRain from '../MatrixRain';
+import { useState } from 'react';
 
 const About = () => {
+  const [matrixEnabled, setMatrixEnabled] = useState(false);
+  
   const skillCategories = [
     {
       title: 'Frontend',
@@ -27,8 +33,9 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="section">
-      <div className="container">
+    <section id="about" className="section relative">
+      <MatrixRain isActive={matrixEnabled} />
+      <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-title">About Me</h2>
@@ -102,6 +109,30 @@ const About = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Git Activity */}
+        <div className="mb-16">
+          <h3 className="text-subtitle flex items-center gap-3 mb-8">
+            <Code className="w-6 h-6" style={{ color: 'var(--text-success)' }} />
+            Development Activity
+          </h3>
+          <p className="text-body mb-6">
+            Recent commits and contributions to my repositories.
+          </p>
+          <GitStatus />
+        </div>
+
+        {/* Interactive Terminal */}
+        <div className="mb-16">
+          <h3 className="text-subtitle flex items-center gap-3 mb-8">
+            <Code className="w-6 h-6" style={{ color: 'var(--text-success)' }} />
+            Try the Terminal
+          </h3>
+          <p className="text-body mb-6">
+            Explore my portfolio through an interactive terminal. Try commands like "whoami", "ls projects", or "help".
+          </p>
+          <InteractiveTerminal onMatrixToggle={setMatrixEnabled} />
         </div>
 
         {/* Experience */}

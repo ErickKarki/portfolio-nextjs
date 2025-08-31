@@ -5,18 +5,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
 :root {
-  /* Terminal/IDE inspired dark theme */
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-tertiary: #21262d;
-  --text-primary: #f0f6fc;
-  --text-secondary: #8b949e;
-  --text-accent: #58a6ff;
-  --text-success: #3fb950;
-  --text-warning: #d29922;
-  --text-error: #f85149;
-  --border: #30363d;
-  --border-muted: #21262d;
+  /* Premium aesthetic dark theme */
+  --bg-primary: #0a0e16;
+  --bg-secondary: #0f1419;
+  --bg-tertiary: #1a202c;
+  --text-primary: #ffffff;
+  --text-secondary: #a0aec0;
+  --text-accent: #00d4ff;
+  --text-success: #00ff88;
+  --text-warning: #ffd700;
+  --text-error: #ff4757;
+  --border: #2d3748;
+  --border-muted: #1a202c;
+  --glow-primary: rgba(0, 212, 255, 0.3);
+  --glow-secondary: rgba(0, 255, 136, 0.2);
 }
 
 * {
@@ -30,6 +32,7 @@ body {
   background: var(--bg-primary);
   font-size: 14px;
   font-weight: 400;
+  overflow-x: hidden;
 }
 
 /* Terminal/IDE Components */
@@ -44,15 +47,21 @@ body {
 
   /* Balanced Typography */
   .text-display {
-    @apply text-4xl lg:text-5xl font-semibold leading-tight;
+    @apply text-5xl lg:text-6xl font-bold leading-tight;
     color: var(--text-primary);
     font-family: 'Inter', system-ui, sans-serif;
+    text-shadow: 0 0 20px var(--glow-primary);
+    background: linear-gradient(135deg, var(--text-primary), var(--text-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .text-title {
-    @apply text-2xl lg:text-3xl font-semibold mb-6;
+    @apply text-3xl lg:text-4xl font-bold mb-8;
     color: var(--text-accent);
     font-family: 'Inter', system-ui, sans-serif;
+    text-shadow: 0 0 10px var(--glow-primary);
   }
   
   .text-subtitle {
@@ -87,31 +96,52 @@ body {
 
   .btn-primary {
     @apply btn;
-    background: var(--text-accent);
+    background: linear-gradient(135deg, var(--text-accent), #0099cc);
     color: var(--bg-primary);
+    box-shadow: 0 4px 15px var(--glow-primary);
+    font-weight: 600;
   }
 
   .btn-primary:hover {
-    background: var(--text-accent);
-    opacity: 0.8;
+    background: linear-gradient(135deg, #00d4ff, var(--text-accent));
+    box-shadow: 0 6px 20px var(--glow-primary);
+    transform: translateY(-2px);
   }
 
   .btn-secondary {
     @apply btn;
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--text-accent);
+    color: var(--text-accent);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(0, 212, 255, 0.2);
+    box-shadow: 0 4px 15px var(--glow-primary);
+    transform: translateY(-1px);
   }
 
   /* Terminal Cards/Windows */
   .terminal-window {
     background: var(--bg-secondary);
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 12px;
     font-family: 'JetBrains Mono', monospace;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .terminal-window:hover {
+    border-color: var(--text-accent);
+    box-shadow: 0 8px 32px var(--glow-primary);
   }
 
   .terminal-header {
     @apply flex items-center gap-2 px-4 py-3 border-b;
-    background: var(--bg-tertiary);
+    background: linear-gradient(135deg, var(--bg-tertiary), rgba(0, 212, 255, 0.05));
     border-bottom-color: var(--border);
+    border-radius: 12px 12px 0 0;
   }
 
   .terminal-dot {
@@ -153,6 +183,9 @@ body {
   .syntax-number { color: var(--text-warning); }
   .syntax-comment { color: var(--text-secondary); }
   .syntax-function { color: #d2a8ff; }
+  .syntax-class { color: #ffa657; }
+  .syntax-operator { color: var(--text-primary); }
+  .syntax-variable { color: #79c0ff; }
 
   /* Navigation */
   .nav-link {
@@ -196,8 +229,13 @@ body {
 }
 
 @keyframes blink {
-  0%, 50% { border-color: transparent; }
-  51%, 100% { border-color: var(--text-accent); }
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
 .typewriter {
@@ -205,6 +243,10 @@ body {
   border-right: 2px solid var(--text-accent);
   white-space: nowrap;
   animation: typing 2s steps(20, end), blink 1s infinite;
+}
+
+.terminal-cursor {
+  animation: cursor-blink 1s infinite;
 }
 
 @keyframes fadeInUp {

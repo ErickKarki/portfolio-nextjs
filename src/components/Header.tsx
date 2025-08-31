@@ -77,7 +77,7 @@ const Header = () => {
           {/* Resume Link */}
           <div className="hidden md:block">
             <a
-              href="#"
+              href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary text-xs"
@@ -118,7 +118,7 @@ const Header = () => {
             })}
             <div className="pt-3 mt-3 border-t" style={{ borderColor: 'var(--border)' }}>
               <a
-                href="#"
+                href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary w-full justify-center text-xs"

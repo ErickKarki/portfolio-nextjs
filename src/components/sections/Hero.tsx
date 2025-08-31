@@ -1,8 +1,20 @@
 'use client';
 
 import { Play, Github, Linkedin, Mail, Code, ArrowDown } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const Hero = () => {
+  const [commandIndex, setCommandIndex] = useState(0);
+  const [displayedCommand, setDisplayedCommand] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  
+  const commands = [
+    'git clone https://github.com/erickkarki/portfolio.git',
+    'cd portfolio && npm install',
+    'npm run dev',
+    'echo "Welcome to my portfolio!"'
+  ];
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -10,23 +22,74 @@ const Hero = () => {
     }
   };
 
+  useEffect(() => {
+    const currentCommand = commands[commandIndex];
+    let charIndex = 0;
+    
+    const typeCommand = () => {
+      if (charIndex < currentCommand.length) {
+        setDisplayedCommand(currentCommand.slice(0, charIndex + 1));
+        charIndex++;
+        setTimeout(typeCommand, 50 + Math.random() * 50); // Variable typing speed
+      } else {
+        setIsTyping(false);
+        setTimeout(() => {
+          setIsTyping(true);
+          setDisplayedCommand('');
+          setCommandIndex((prev) => (prev + 1) % commands.length);
+        }, 2000); // Pause before next command
+      }
+    };
+
+    const timer = setTimeout(typeCommand, 500);
+    return () => clearTimeout(timer);
+  }, [commandIndex]);
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-12">
+    <section id="home" className="min-h-screen flex items-center justify-center pt-32">
       <div className="container">
         <div className="max-w-4xl">
           {/* Main Introduction */}
-          <div className="mb-12">
-            <h1 className="text-display mb-6">
+          <div className="mb-16 text-center">
+            <h1 className="text-display mb-8">
               Hi, I'm Erick Karki
             </h1>
-            <p className="text-body mb-8 text-lg">
+            <p className="text-body mb-10 text-xl max-w-3xl mx-auto leading-relaxed">
               A full-stack software engineer who builds scalable web applications and cloud infrastructure. 
               Currently pursuing Computer Engineering at Pokhara University while working on projects involving 
               React, Node.js, AWS, and AI/ML technologies.
             </p>
           </div>
 
-          {/* Code Block - Simplified */}
+          {/* Live Terminal Demo */}
+          <div className="terminal-window mb-8">
+            <div className="terminal-header">
+              <div className="flex items-center gap-2">
+                <div className="terminal-dot red"></div>
+                <div className="terminal-dot yellow"></div>
+                <div className="terminal-dot green"></div>
+              </div>
+              <div className="text-xs text-mono" style={{ color: 'var(--text-secondary)' }}>
+                terminal
+              </div>
+            </div>
+            <div className="terminal-content">
+              <div className="text-mono text-sm space-y-2">
+                <div className="flex items-center">
+                  <span style={{ color: 'var(--text-success)' }}>➜</span>
+                  <span className="ml-2" style={{ color: 'var(--text-accent)' }}>~</span>
+                  <span className="ml-2 text-xs" style={{ color: 'var(--text-secondary)' }}>[main]</span>
+                  <span className="ml-2">$</span>
+                  <span className="ml-2">
+                    {displayedCommand}
+                    {isTyping && <span className="animate-pulse">|</span>}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Code Block - Developer Profile */}
           <div className="terminal-window mb-12">
             <div className="terminal-header">
               <div className="flex items-center gap-2">
@@ -64,28 +127,28 @@ const Hero = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row gap-6 mb-16 justify-center">
             <button
               onClick={() => scrollToSection('#projects')}
-              className="btn-primary flex items-center gap-2 justify-center"
+              className="btn-primary flex items-center gap-3 justify-center px-8 py-4 text-lg"
             >
-              <Play className="w-4 h-4" />
+              <Play className="w-5 h-5" />
               View My Work
             </button>
             
             <button
               onClick={() => scrollToSection('#about')}
-              className="btn-secondary flex items-center gap-2 justify-center"
+              className="btn-secondary flex items-center gap-3 justify-center px-8 py-4 text-lg"
             >
-              <Code className="w-4 h-4" />
+              <Code className="w-5 h-5" />
               About Me
             </button>
 
             <button
               onClick={() => scrollToSection('#contact')}
-              className="btn-secondary flex items-center gap-2 justify-center"
+              className="btn-secondary flex items-center gap-3 justify-center px-8 py-4 text-lg"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-5 h-5" />
               Get In Touch
             </button>
           </div>

@@ -81,8 +81,22 @@ const Projects = () => {
                   <div className="terminal-dot yellow"></div>
                   <div className="terminal-dot green"></div>
                 </div>
-                <div className="text-xs text-mono" style={{ color: 'var(--text-secondary)' }}>
-                  project_{index + 1}.md
+                <div className="flex items-center gap-4 flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <div 
+                      className="w-2 h-2 rounded-full" 
+                      style={{ backgroundColor: project.tech.includes('Python') ? '#3776ab' : project.tech.includes('React') ? '#61dafb' : '#f89820' }}
+                    ></div>
+                    <div className="text-xs text-mono" style={{ color: 'var(--text-secondary)' }}>
+                      {project.tech.includes('Python') ? 'project.py' : 
+                       project.tech.includes('React') ? 'project.jsx' : 
+                       project.tech.includes('Java') ? 'project.java' : 'project.md'}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1 text-xs" style={{ color: 'var(--text-secondary)' }}>
+                    <div className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--text-success)' }}></div>
+                    <span>main</span>
+                  </div>
                 </div>
               </div>
               <div className="terminal-content">
